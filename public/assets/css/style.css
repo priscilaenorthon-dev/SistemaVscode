@@ -1,0 +1,269 @@
+:root {
+    --primary-color: #4F46E5;
+    /* Indigo 600 */
+    --primary-hover: #4338ca;
+    /* Indigo 700 */
+    --secondary-color: #10B981;
+    /* Emerald 500 */
+    --background-color: #F3F4F6;
+    /* Gray 100 */
+    --surface-color: #FFFFFF;
+    --text-primary: #111827;
+    /* Gray 900 */
+    --text-secondary: #6B7280;
+    /* Gray 500 */
+    --border-color: #E5E7EB;
+    /* Gray 200 */
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --navbar-bg: #1F2937;
+    /* Gray 800 */
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    --primary-color: #6366F1;
+    /* Indigo 500 - lighter for dark mode */
+    --primary-hover: #4F46E5;
+    --secondary-color: #34D399;
+    /* Emerald 400 */
+    --background-color: #0F172A;
+    /* Slate 900 */
+    --surface-color: #1E293B;
+    /* Slate 800 */
+    --text-primary: #F1F5F9;
+    /* Slate 100 */
+    --text-secondary: #94A3B8;
+    /* Slate 400 */
+    --border-color: #334155;
+    /* Slate 700 */
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    --navbar-bg: #0F172A;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar Customization */
+.navbar {
+    background-color: var(--navbar-bg) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.025em;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+/* Card Customization */
+.card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    /* 16px */
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.card-header {
+    background-color: transparent;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Button Customization */
+.btn {
+    border-radius: 0.5rem;
+    /* 8px */
+    font-weight: 500;
+    padding: 0.625rem 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.btn-outline-light:hover {
+    color: var(--primary-color);
+    background-color: white;
+    border-color: white;
+}
+
+/* Table Customization */
+.table {
+    margin-bottom: 0;
+    color: var(--text-primary);
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+}
+
+.table td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--background-color);
+}
+
+/* Form Controls */
+.form-control,
+.form-select {
+    border-radius: 0.5rem;
+    border-color: var(--border-color);
+    padding: 0.625rem 1rem;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+}
+
+/* Utilities */
+.text-primary-custom {
+    color: var(--primary-color);
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--primary-color), #818cf8);
+}
+
+.shadow-sm-custom {
+    box-shadow: var(--card-shadow);
+}
+
+/* Clickable Card Hover Effect */
+.card-hover-effect {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card-hover-effect:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.card-hover-effect:hover .text-dark {
+    color: var(--primary-color) !important;
+}
+
+/* Dark Mode Toggle Button */
+.theme-toggle {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background-color: var(--border-color);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background-color: var(--primary-color);
+}
+
+[data-theme="dark"] .theme-toggle::before {
+    transform: translateX(30px);
+}
+
+/* Dark mode specific overrides */
+[data-theme="dark"] .bg-light {
+    background-color: var(--surface-color) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-dark {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .border {
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .badge.bg-light {
+    background-color: var(--surface-color) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .list-group-item {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .input-group-text {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
