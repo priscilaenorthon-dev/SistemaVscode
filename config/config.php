@@ -39,6 +39,23 @@ function app_log($message, array $context = []) {
     file_put_contents(LOG_PATH, $line, FILE_APPEND);
 }
 
+// Auditoria estruturada
+function audit_log(PDO $pdo, $action, $entity, $entityId, array $details = []) {
+    try {
+        $userId = $_SESSION['user_id'] ?? null;
+        $stmt = $pdo->prepare("INSERT INTO audit_logs (user_id, action, entity, entity_id, details, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
+        $stmt->execute([
+            $userId,
+            $action,
+            $entity,
+            $entityId,
+            json_encode($details, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        ]);
+    } catch (Throwable $e) {
+        app_log('Falha ao registrar auditoria', ['error' => $e->getMessage()]);
+    }
+}
+
 // CSRF helpers
 function csrf_token() {
     if (empty($_SESSION['csrf_token'])) {

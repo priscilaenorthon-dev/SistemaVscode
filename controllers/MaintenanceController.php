@@ -10,7 +10,7 @@ class MaintenanceController {
         // Listar ferramentas em manutenção ou calibração
         $sql = "SELECT m.*, t.code, t.description 
                 FROM maintenance m
-                JOIN tools t ON m.tool_id = t.id
+                JOIN tools t ON m.tool_id = t.id AND t.deleted_at IS NULL
                 WHERE m.status = 'pending'
                 ORDER BY m.scheduled_date ASC";
         

@@ -1,0 +1,50 @@
+[19-Nov-2025 21:25:32 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ferramentaria.tools' doesn't exist in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php:12
+Stack trace:
+#0 C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php(12): PDO->query('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\SistemaVscode\public\index.php(32): DashboardController->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php on line 12
+[19-Nov-2025 21:25:33 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ferramentaria.tools' doesn't exist in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php:12
+Stack trace:
+#0 C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php(12): PDO->query('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\SistemaVscode\public\index.php(32): DashboardController->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php on line 12
+[19-Nov-2025 21:25:33 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ferramentaria.tools' doesn't exist in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php:12
+Stack trace:
+#0 C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php(12): PDO->query('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\SistemaVscode\public\index.php(32): DashboardController->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php on line 12
+[19-Nov-2025 21:25:34 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ferramentaria.tools' doesn't exist in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php:12
+Stack trace:
+#0 C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php(12): PDO->query('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\SistemaVscode\public\index.php(32): DashboardController->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php on line 12
+[19-Nov-2025 21:25:41 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ferramentaria.tools' doesn't exist in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php:12
+Stack trace:
+#0 C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php(12): PDO->query('SELECT COUNT(*)...')
+#1 C:\xampp\htdocs\SistemaVscode\public\index.php(32): DashboardController->index()
+#2 {main}
+  thrown in C:\xampp\htdocs\SistemaVscode\controllers\DashboardController.php on line 12
+[2025-11-19 21:51:23] Falha no login {"email":"admin@empresa.com"}
+[2025-11-19 21:53:08] Falha no login {"email":"admin@empresa.com"}
+[2025-11-19 21:54:18] Falha no login {"email":"admin@empresa.com"}
+[2025-11-19 21:55:02] Falha no login {"email":"admin@empresa.com"}
+[2025-11-19 21:56:01] Falha no login {"email":"admin@empresa.com"}
+[2025-11-19 21:56:21] Falha no login {"email":"admin@empresa.com"}
+[19-Nov-2025 21:58:07 America/Sao_Paulo] PHP Warning:  Undefined array key "expected_return_date" in C:\xampp\htdocs\SistemaVscode\views\loans\print.php on line 34
+[19-Nov-2025 22:11:51 America/Sao_Paulo] PHP Warning:  Undefined array key "expected_return_date" in C:\xampp\htdocs\SistemaVscode\views\loans\print.php on line 34
+[2025-11-19 22:24:31] Falha ao registrar auditoria {"error":"SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sistemavscode.audit_logs' doesn't exist"}
+[19-Nov-2025 22:46:54 America/Sao_Paulo] PHP Warning:  require_once(../views/auth/login.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\SistemaVscode\public\index.php on line 16
+[19-Nov-2025 22:46:54 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Failed opening required '../views/auth/login.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\SistemaVscode\public\index.php:16
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\SistemaVscode\public\index.php on line 16
+[19-Nov-2025 22:46:55 America/Sao_Paulo] PHP Warning:  require_once(../views/auth/login.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\SistemaVscode\public\index.php on line 16
+[19-Nov-2025 22:46:55 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Failed opening required '../views/auth/login.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\SistemaVscode\public\index.php:16
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\SistemaVscode\public\index.php on line 16
+[2025-11-19 22:50:48] Falha no login {"email":"admin@empresa.com"}

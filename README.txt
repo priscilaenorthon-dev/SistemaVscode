@@ -21,7 +21,7 @@ INSTALAÇÃO
 
    c) Importe o banco de dados:
       - Acesse http://localhost/phpmyadmin
-      - Crie um banco chamado 'ferramentaria'
+      - Crie um banco chamado 'sistemavscode'
       - Importe um dos arquivos da pasta /bd:
         * banco_zerado.sql (para começar do zero)
         * banco_com_dados.sql (com dados de teste)
@@ -42,15 +42,15 @@ CREDENCIAIS DE ACESSO
 
 ADMINISTRADOR (acesso total):
 - Email: admin@empresa.com
-- Senha: admin123
+- Senha: password
 
-OPERADOR (se usar banco_com_dados.sql):
-- Email: operador1@empresa.com
-- Senha: admin123
+OPERADOR:
+- Email: operador@empresa.com
+- Senha: password
 
-USUÁRIO COMUM (se usar banco_com_dados.sql):
-- Email: joao@empresa.com
-- Senha: admin123
+USUÁRIO COMUM:
+- Email: usuario@usuario.com.br
+- Senha: password
 
 ==============================================
 FUNCIONALIDADES PRINCIPAIS
@@ -160,9 +160,9 @@ ESTRUTURA DO PROJETO
 TECNOLOGIAS UTILIZADAS
 ==============================================
 
-BACKEND:
+BANCOS E BACKEND:
 - PHP 7.4+ (MVC Pattern)
-- MySQL/MariaDB
+- MySQL/MariaDB (DB: sistemavscode)
 - PDO (conexão segura)
 - Password Hash (bcrypt)
 
@@ -218,7 +218,7 @@ A pasta /bd contém:
    - Ideal para testes
 
 Para importar:
-mysql -u root ferramentaria < bd/banco_zerado.sql
+mysql -u root sistemavscode < bd/banco_zerado.sql
 
 Ou via phpMyAdmin (Importar > Escolher arquivo)
 
@@ -229,7 +229,7 @@ SOLUÇÃO DE PROBLEMAS
 1. ERRO DE CONEXÃO COM BANCO:
    - Verifique se MySQL está rodando
    - Confira config/database.php
-   - Verifique se o banco 'ferramentaria' existe
+   - Verifique se o banco 'sistemavscode' existe
 
 2. PÁGINA EM BRANCO:
    - Ative display_errors no php.ini

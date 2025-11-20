@@ -1,7 +1,7 @@
 <?php
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'ferramentaria');
+define('DB_NAME', 'sistemavscode');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 

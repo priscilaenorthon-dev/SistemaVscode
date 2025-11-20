@@ -18,6 +18,7 @@
 <?php endif; ?>
 
 <form action="<?php echo BASE_URL; ?>/?route=loans_store" method="POST" id="loanForm">
+    <?php echo csrf_field(); ?>
     <div class="row g-4">
         <!-- Coluna da Esquerda: Dados do Empréstimo -->
         <div class="col-md-5">

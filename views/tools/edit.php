@@ -19,8 +19,9 @@
 
 <div class="card border-0 shadow-sm-custom">
     <div class="card-body p-4">
-        <form action="<?php echo BASE_URL; ?>/?route=tools_update" method="POST">
-            <input type="hidden" name="id" value="<?php echo $tool['id']; ?>">
+<form action="<?php echo BASE_URL; ?>/?route=tools_update" method="POST">
+    <?php echo csrf_field(); ?>
+    <input type="hidden" name="id" value="<?php echo $tool['id']; ?>">
             
             <div class="row g-3 mb-4">
                 <div class="col-md-12">

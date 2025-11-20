@@ -11,19 +11,34 @@
 </div>
 
 <div class="card border-0 shadow-sm-custom mb-4">
-    <div class="card-body p-2">
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a class="nav-link <?php echo (!isset($_GET['status']) || $_GET['status'] == 'open') ? 'active' : ''; ?>" href="<?php echo BASE_URL; ?>/?route=loans&status=open">
-                    <i class="bi bi-hourglass-split me-2"></i>Em Aberto
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php echo (isset($_GET['status']) && $_GET['status'] == 'closed') ? 'active' : ''; ?>" href="<?php echo BASE_URL; ?>/?route=loans&status=closed">
-                    <i class="bi bi-archive me-2"></i>Histórico (Fechados)
-                </a>
-            </li>
-        </ul>
+    <div class="card-body p-3">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-6">
+                <ul class="nav nav-pills">
+                    <li class="nav-item me-2">
+                        <a class="nav-link <?php echo (!isset($_GET['status']) || $_GET['status'] == 'open') ? 'active' : ''; ?>" href="<?php echo BASE_URL; ?>/?route=loans&status=open">
+                            <i class="bi bi-hourglass-split me-2"></i>Em Aberto
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo (isset($_GET['status']) && $_GET['status'] == 'closed') ? 'active' : ''; ?>" href="<?php echo BASE_URL; ?>/?route=loans&status=closed">
+                            <i class="bi bi-archive me-2"></i>Histórico (Fechados)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <form class="d-flex" method="GET" action="<?php echo BASE_URL; ?>/">
+                    <input type="hidden" name="route" value="loans">
+                    <input type="hidden" name="status" value="<?php echo isset($_GET['status']) ? htmlspecialchars($_GET['status']) : 'open'; ?>">
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-secondary"></i></span>
+                        <input type="text" class="form-control border-start-0 ps-1" name="q" placeholder="Buscar por #ID, colaborador ou operador" value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>">
+                        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 

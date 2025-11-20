@@ -40,6 +40,16 @@
                     <option value="inactive" <?php echo (isset($_GET['status']) && $_GET['status'] == 'inactive') ? 'selected' : ''; ?>>Inativa</option>
                 </select>
             </div>
+
+            <div class="col-md-2">
+                <label class="form-label text-secondary small fw-bold text-uppercase">Registros</label>
+                <div class="form-check pt-2">
+                    <input class="form-check-input" type="checkbox" value="1" id="include_deleted" name="include_deleted" <?php echo isset($_GET['include_deleted']) && $_GET['include_deleted'] == '1' ? 'checked' : ''; ?>>
+                    <label class="form-check-label small" for="include_deleted">
+                        Incluir arquivadas
+                    </label>
+                </div>
+            </div>
             
             <div class="col-md-2">
                 <button type="submit" class="btn btn-primary w-100">
@@ -157,25 +167,31 @@ function exportToExcel() {
                             </td>
                             <td>
                                 <?php 
-                                    $statusClass = 'secondary';
-                                    $statusIcon = 'circle';
-                                    $statusLabel = $tool['status'];
-                                    switch($tool['status']) {
-                                        case 'available': 
-                                            $statusClass = 'success'; 
-                                            $statusIcon = 'check-circle';
-                                            $statusLabel = 'Disponível'; 
-                                            break;
-                                        case 'borrowed': 
-                                            $statusClass = 'warning'; 
-                                            $statusIcon = 'clock';
-                                            $statusLabel = 'Emprestada'; 
-                                            break;
-                                        case 'maintenance': 
-                                            $statusClass = 'danger'; 
-                                            $statusIcon = 'wrench';
-                                            $statusLabel = 'Manutenção'; 
-                                            break;
+                                    if (!empty($tool['deleted_at'])) {
+                                        $statusClass = 'secondary';
+                                        $statusIcon = 'archive';
+                                        $statusLabel = 'Arquivada';
+                                    } else {
+                                        $statusClass = 'secondary';
+                                        $statusIcon = 'circle';
+                                        $statusLabel = $tool['status'];
+                                        switch($tool['status']) {
+                                            case 'available': 
+                                                $statusClass = 'success'; 
+                                                $statusIcon = 'check-circle';
+                                                $statusLabel = 'Disponível'; 
+                                                break;
+                                            case 'borrowed': 
+                                                $statusClass = 'warning'; 
+                                                $statusIcon = 'clock';
+                                                $statusLabel = 'Emprestada'; 
+                                                break;
+                                            case 'maintenance': 
+                                                $statusClass = 'danger'; 
+                                                $statusIcon = 'wrench';
+                                                $statusLabel = 'Manutenção'; 
+                                                break;
+                                        }
                                     }
                                 ?>
                                 <span class="badge bg-<?php echo $statusClass; ?> bg-opacity-10 text-<?php echo $statusClass; ?> border border-<?php echo $statusClass; ?> border-opacity-10 rounded-pill px-3">
@@ -185,7 +201,24 @@ function exportToExcel() {
                             <td class="text-end pe-4">
                                 <div class="btn-group">
                                     <a href="<?php echo BASE_URL; ?>/?route=tools_view&id=<?php echo $tool['id']; ?>" class="btn btn-sm btn-light text-secondary" title="Detalhes"><i class="bi bi-eye"></i></a>
-                                    <a href="<?php echo BASE_URL; ?>/?route=tools_edit&id=<?php echo $tool['id']; ?>" class="btn btn-sm btn-light text-primary" title="Editar"><i class="bi bi-pencil"></i></a>
+                                    <?php if (empty($tool['deleted_at'])): ?>
+                                        <a href="<?php echo BASE_URL; ?>/?route=tools_edit&id=<?php echo $tool['id']; ?>" class="btn btn-sm btn-light text-primary" title="Editar"><i class="bi bi-pencil"></i></a>
+                                        <form action="<?php echo BASE_URL; ?>/?route=tools_delete" method="POST" class="d-inline">
+                                            <?php echo csrf_field(); ?>
+                                            <input type="hidden" name="id" value="<?php echo $tool['id']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-light text-danger" title="Arquivar" onclick="return confirm('Arquivar esta ferramenta?');">
+                                                <i class="bi bi-archive"></i>
+                                            </button>
+                                        </form>
+                                    <?php else: ?>
+                                        <form action="<?php echo BASE_URL; ?>/?route=tools_restore" method="POST" class="d-inline">
+                                            <?php echo csrf_field(); ?>
+                                            <input type="hidden" name="id" value="<?php echo $tool['id']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-light text-success" title="Restaurar">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                            </button>
+                                        </form>
+                                    <?php endif; ?>
                                 </div>
                             </td>
                         </tr>

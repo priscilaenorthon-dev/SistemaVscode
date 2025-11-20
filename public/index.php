@@ -63,6 +63,18 @@ switch ($route) {
         $controller = new UserController($pdo);
         $controller->update();
         break;
+    case 'users_delete':
+        checkAuth(['admin']);
+        require_once '../controllers/UserController.php';
+        $controller = new UserController($pdo);
+        $controller->delete($_POST['id'] ?? null);
+        break;
+    case 'users_restore':
+        checkAuth(['admin']);
+        require_once '../controllers/UserController.php';
+        $controller = new UserController($pdo);
+        $controller->restore($_POST['id'] ?? null);
+        break;
     
     // --- FERRAMENTAS ---
     case 'tools':
@@ -100,6 +112,18 @@ switch ($route) {
         require_once '../controllers/ToolController.php';
         $controller = new ToolController($pdo);
         $controller->view($_GET['id']);
+        break;
+    case 'tools_delete':
+        checkAuth(['admin']);
+        require_once '../controllers/ToolController.php';
+        $controller = new ToolController($pdo);
+        $controller->delete($_POST['id'] ?? null);
+        break;
+    case 'tools_restore':
+        checkAuth(['admin']);
+        require_once '../controllers/ToolController.php';
+        $controller = new ToolController($pdo);
+        $controller->restore($_POST['id'] ?? null);
         break;
 
     // --- EMPRÉSTIMOS ---
@@ -145,6 +169,14 @@ switch ($route) {
         checkAuth(['admin', 'operator']);
         require_once '../controllers/ReportController.php';
         $controller = new ReportController($pdo);
+        $controller->index();
+        break;
+
+    // --- AUDITORIA ---
+    case 'audit_logs':
+        checkAuth(['admin']);
+        require_once '../controllers/AuditController.php';
+        $controller = new AuditController($pdo);
         $controller->index();
         break;
 

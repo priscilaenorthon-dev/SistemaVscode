@@ -125,6 +125,8 @@ class ToolController {
             
             try {
                 $stmt->execute([$code, $description, $category_id, $model_id, $manufacturer, $serial_number, $location, $acquisition_date, $status, $quantity, $quantity]);
+                $toolId = $this->pdo->lastInsertId();
+                audit_log($this->pdo, 'tool_created', 'tool', $toolId, ['code' => $code, 'quantity' => $quantity]);
                 redirect('?route=tools');
             } catch (PDOException $e) {
                 $error = "Erro ao cadastrar ferramenta: " . $e->getMessage();
@@ -206,6 +208,7 @@ class ToolController {
             
             try {
                 $stmt->execute([$code, $description, $category_id, $model_id, $manufacturer, $serial_number, $location, $acquisition_date, $status, $new_quantity, $new_available, $id]);
+                audit_log($this->pdo, 'tool_updated', 'tool', $id, ['code' => $code, 'quantity' => $new_quantity, 'available' => $new_available]);
                 redirect('?route=tools');
             } catch (PDOException $e) {
                 $error = "Erro ao atualizar ferramenta: " . $e->getMessage();
@@ -221,7 +224,7 @@ class ToolController {
             FROM tools t
             LEFT JOIN tool_categories c ON t.category_id = c.id
             LEFT JOIN tool_models m ON t.model_id = m.id
-            WHERE t.id = ?
+            WHERE t.id = ? AND t.deleted_at IS NULL
         ");
         $stmt->execute([$id]);
         $tool = $stmt->fetch();
@@ -286,6 +289,10 @@ class ToolController {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             redirect('?route=tools');
         }
+        $id = $id ?? ($_POST['id'] ?? null);
+        if (!$id) {
+            redirect('?route=tools');
+        }
         if (!validate_csrf($_POST['csrf_token'] ?? '')) {
             app_log('CSRF falhou ao deletar ferramenta', ['id' => $id]);
             redirect('?route=tools');
@@ -293,11 +300,16 @@ class ToolController {
 
         $stmt = $this->pdo->prepare("UPDATE tools SET deleted_at = NOW(), status = 'inactive' WHERE id = ?");
         $stmt->execute([$id]);
+        audit_log($this->pdo, 'tool_archived', 'tool', $id, []);
         redirect('?route=tools');
     }
 
     public function restore($id) {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            redirect('?route=tools');
+        }
+        $id = $id ?? ($_POST['id'] ?? null);
+        if (!$id) {
             redirect('?route=tools');
         }
         if (!validate_csrf($_POST['csrf_token'] ?? '')) {
@@ -307,6 +319,7 @@ class ToolController {
 
         $stmt = $this->pdo->prepare("UPDATE tools SET deleted_at = NULL, status = 'available' WHERE id = ?");
         $stmt->execute([$id]);
+        audit_log($this->pdo, 'tool_restored', 'tool', $id, []);
         redirect('?route=tools');
     }
 }

@@ -10,7 +10,8 @@
 
 <div class="card">
     <div class="card-body">
-        <form action="<?php echo BASE_URL; ?>/?route=users_store" method="POST">
+<form action="<?php echo BASE_URL; ?>/?route=users_store" method="POST">
+    <?php echo csrf_field(); ?>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="name" class="form-label">Nome Completo</label>

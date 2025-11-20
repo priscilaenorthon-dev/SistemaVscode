@@ -1,5 +1,5 @@
 ==============================================
-BACKUPS DO BANCO DE DADOS - Sistema Ferramentaria
+BACKUPS DO BANCO DE DADOS - Sistema Ferramentaria (DB: sistemavscode)
 ==============================================
 
 Esta pasta contém 2 arquivos SQL para diferentes finalidades:
@@ -25,13 +25,13 @@ CREDENCIAIS DE ACESSO:
 COMO IMPORTAR:
 1. Via phpMyAdmin:
    - Acesse http://localhost/phpmyadmin
-   - Selecione o banco 'ferramentaria'
+   - Selecione o banco 'sistemavscode'
    - Clique em 'Importar'
    - Escolha o arquivo 'banco_zerado.sql'
    - Clique em 'Executar'
 
 2. Via linha de comando:
-   mysql -u root ferramentaria < banco_zerado.sql
+   mysql -u root sistemavscode < banco_zerado.sql
 
 ==============================================
 2. banco_com_dados.sql
@@ -52,13 +52,13 @@ QUANDO USAR:
 COMO IMPORTAR:
 1. Via phpMyAdmin:
    - Acesse http://localhost/phpmyadmin
-   - Selecione o banco 'ferramentaria'
+   - Selecione o banco 'sistemavscode'
    - Clique em 'Importar'
    - Escolha o arquivo 'banco_com_dados.sql'
    - Clique em 'Executar'
 
 2. Via linha de comando:
-   mysql -u root ferramentaria < banco_com_dados.sql
+   mysql -u root sistemavscode < banco_com_dados.sql
 
 ==============================================
 IMPORTANTE - LEIA ANTES DE IMPORTAR
@@ -81,10 +81,10 @@ COMO CRIAR NOVOS BACKUPS
 Para criar um novo backup do banco atual:
 
 1. Via linha de comando (Windows):
-   C:\xampp\mysql\bin\mysqldump.exe -u root ferramentaria > bd\meu_backup.sql
+   C:\xampp\mysql\bin\mysqldump.exe -u root sistemavscode > bd\meu_backup.sql
 
 2. Via phpMyAdmin:
-   - Selecione o banco 'ferramentaria'
+   - Selecione o banco 'sistemavscode'
    - Clique em 'Exportar'
    - Escolha 'Método rápido'
    - Clique em 'Executar'
@@ -101,6 +101,7 @@ Tabelas principais:
 - loans (empréstimos)
 - loan_items (itens de cada empréstimo)
 - maintenance (manutenções)
+- audit_logs (trilha de auditoria)
 
 ==============================================
 SUPORTE

@@ -4,9 +4,9 @@
 -- =============================================
 
 -- Criar banco de dados
-DROP DATABASE IF EXISTS ferramentaria;
-CREATE DATABASE ferramentaria CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE ferramentaria;
+DROP DATABASE IF EXISTS sistemavscode;
+CREATE DATABASE sistemavscode CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE sistemavscode;
 
 -- =============================================
 -- TABELAS
@@ -22,7 +22,8 @@ CREATE TABLE users (
     sector VARCHAR(100),
     level ENUM('admin', 'operator', 'user') DEFAULT 'user',
     status ENUM('active', 'inactive') DEFAULT 'active',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL
 );
 
 -- Tabela de categorias de ferramentas
@@ -54,6 +55,7 @@ CREATE TABLE tools (
     quantity INT DEFAULT 1,
     available_quantity INT DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
     FOREIGN KEY (category_id) REFERENCES tool_categories(id),
     FOREIGN KEY (model_id) REFERENCES tool_models(id)
 );
@@ -94,6 +96,21 @@ CREATE TABLE maintenance (
     FOREIGN KEY (tool_id) REFERENCES tools(id)
 );
 
+-- Tabela de auditoria
+CREATE TABLE audit_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NULL,
+    action VARCHAR(100) NOT NULL,
+    entity VARCHAR(100) NOT NULL,
+    entity_id INT NOT NULL,
+    details JSON NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_audit_entity (entity, entity_id),
+    INDEX idx_audit_action (action),
+    INDEX idx_audit_user (user_id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 -- =============================================
 -- DADOS INICIAIS
 -- =============================================
@@ -124,9 +141,12 @@ INSERT INTO tool_models (name, description) VALUES
 CREATE INDEX idx_tools_code ON tools(code);
 CREATE INDEX idx_tools_status ON tools(status);
 CREATE INDEX idx_tools_available ON tools(available_quantity);
+CREATE INDEX idx_tools_deleted ON tools(deleted_at);
+CREATE INDEX idx_users_deleted ON users(deleted_at);
 CREATE INDEX idx_loans_status ON loans(status);
 CREATE INDEX idx_loans_date ON loans(loan_date);
 CREATE INDEX idx_loan_items_status ON loan_items(status);
+CREATE INDEX idx_audit_logs_created ON audit_logs(created_at);
 
 -- =============================================
 -- FIM DO SCRIPT

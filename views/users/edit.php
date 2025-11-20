@@ -10,8 +10,9 @@
 
 <div class="card">
     <div class="card-body">
-        <form action="<?php echo BASE_URL; ?>/?route=users_update" method="POST">
-            <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+<form action="<?php echo BASE_URL; ?>/?route=users_update" method="POST">
+    <?php echo csrf_field(); ?>
+    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
             
             <div class="row mb-3">
                 <div class="col-md-6">

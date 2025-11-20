@@ -38,6 +38,7 @@ class DashboardController {
             $userLoans = $stmt->fetchAll();
             
             // Estatísticas do usuário
+            // Empréstimos
             $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM loans WHERE user_id = ?");
             $stmt->execute([$userId]);
             $userStats['total_loans'] = $stmt->fetchColumn();
@@ -46,6 +47,7 @@ class DashboardController {
             $stmt->execute([$userId]);
             $userStats['active_loans'] = $stmt->fetchColumn();
             
+            // Ferramentas distintas já usadas
             $stmt = $this->pdo->prepare("
                 SELECT COUNT(DISTINCT li.tool_id) 
                 FROM loan_items li 
@@ -54,6 +56,26 @@ class DashboardController {
             ");
             $stmt->execute([$userId]);
             $userStats['tools_used'] = $stmt->fetchColumn();
+
+            // Quantidade de itens retirados (total)
+            $stmt = $this->pdo->prepare("
+                SELECT COALESCE(SUM(li.quantity),0)
+                FROM loan_items li
+                JOIN loans l ON li.loan_id = l.id
+                WHERE l.user_id = ?
+            ");
+            $stmt->execute([$userId]);
+            $userStats['total_items_taken'] = (int)$stmt->fetchColumn();
+
+            // Quantidade de itens ainda a devolver (em empréstimos abertos)
+            $stmt = $this->pdo->prepare("
+                SELECT COALESCE(SUM(li.quantity),0)
+                FROM loan_items li
+                JOIN loans l ON li.loan_id = l.id
+                WHERE l.user_id = ? AND l.status = 'open'
+            ");
+            $stmt->execute([$userId]);
+            $userStats['items_to_return'] = (int)$stmt->fetchColumn();
         }
 
         require '../views/layouts/header.php';

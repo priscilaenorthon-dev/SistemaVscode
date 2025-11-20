@@ -132,17 +132,6 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="bg-info bg-opacity-10 p-2 rounded me-3">
-                            <i class="bi bi-clock text-info"></i>
-                        </div>
-                        <div>
-                            <div class="text-secondary small">Tempo Médio</div>
-                            <div class="fs-4 fw-bold text-dark"><?php echo $stats['avg_loan_days'] ?: '0'; ?> <small class="text-muted fs-6">dias</small></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

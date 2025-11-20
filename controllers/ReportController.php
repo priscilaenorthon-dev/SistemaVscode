@@ -51,6 +51,7 @@ class ReportController {
             SELECT COUNT(DISTINCT li.tool_id) 
             FROM loan_items li 
             JOIN loans l ON li.loan_id = l.id 
+            JOIN tools t ON li.tool_id = t.id AND t.deleted_at IS NULL
             WHERE DATE(l.loan_date) BETWEEN ? AND ?
         ");
         $stmt->execute([$start_date, $end_date]);
@@ -75,7 +76,7 @@ class ReportController {
         $sql = "
             SELECT t.code, t.description, COUNT(li.id) as loan_count
             FROM loan_items li
-            JOIN tools t ON li.tool_id = t.id
+            JOIN tools t ON li.tool_id = t.id AND t.deleted_at IS NULL
             JOIN loans l ON li.loan_id = l.id
             WHERE DATE(l.loan_date) BETWEEN ? AND ?
             GROUP BY t.id
@@ -92,7 +93,7 @@ class ReportController {
         $sql = "
             SELECT u.name, u.registration, u.sector, COUNT(l.id) as loan_count
             FROM loans l
-            JOIN users u ON l.user_id = u.id
+            JOIN users u ON l.user_id = u.id AND u.deleted_at IS NULL
             WHERE DATE(l.loan_date) BETWEEN ? AND ?
             GROUP BY u.id
             ORDER BY loan_count DESC
