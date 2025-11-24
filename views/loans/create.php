@@ -39,8 +39,9 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="tool_codes" class="form-label fw-medium">Ferramentas Selecionadas</label>
-                        <textarea class="form-control font-monospace bg-light" id="tool_codes" name="tool_codes" rows="6" readonly required placeholder="Selecione as ferramentas ao lado..."></textarea>
+                        <label for="tool_codes_display" class="form-label fw-medium">Ferramentas Selecionadas</label>
+                        <textarea class="form-control font-monospace bg-light" id="tool_codes_display" rows="6" readonly required placeholder="Selecione as ferramentas ao lado..."></textarea>
+                        <input type="hidden" id="tool_codes" name="tool_codes">
                         <div class="form-text text-end" id="countTools">0 ferramentas selecionadas</div>
                     </div>
 
@@ -70,6 +71,7 @@
                         <?php foreach ($availableTools as $tool): ?>
                             <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3 tool-item" 
                                     data-code="<?php echo $tool['code']; ?>" 
+                                    data-description="<?php echo htmlspecialchars($tool['description']); ?>"
                                     data-max-qty="<?php echo $tool['available_quantity']; ?>"
                                     data-search="<?php echo strtolower($tool['code'] . ' ' . $tool['description'] . ' ' . $tool['model_name']); ?>">
                                 <div class="flex-grow-1">
@@ -127,13 +129,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchTool');
     const toolItems = document.querySelectorAll('.tool-item');
-    const textarea = document.getElementById('tool_codes');
+    const displayTextarea = document.getElementById('tool_codes_display');
+    const hiddenInput = document.getElementById('tool_codes');
     const countDisplay = document.getElementById('countTools');
     const quantityModal = new bootstrap.Modal(document.getElementById('quantityModal'));
     const quantityInput = document.getElementById('quantityInput');
     const confirmBtn = document.getElementById('confirmQuantity');
     
-    let selectedTools = new Map(); // code => quantity
+    let selectedTools = new Map(); // code => { quantity, name }
     let currentTool = null;
 
     // Filtro de busca
@@ -153,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     toolItems.forEach(item => {
         item.addEventListener('click', function() {
             const code = this.getAttribute('data-code');
+            const name = this.getAttribute('data-description');
             const maxQty = parseInt(this.getAttribute('data-max-qty'));
             
             if (selectedTools.has(code)) {
@@ -165,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateTextarea();
             } else {
                 // Abrir modal para selecionar quantidade
-                currentTool = {code, maxQty, element: this};
+                currentTool = {code, maxQty, name, element: this};
                 document.getElementById('modalToolCode').textContent = code;
                 document.getElementById('modalMaxQty').textContent = maxQty;
                 quantityInput.value = 1;
@@ -186,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Adicionar ferramenta com quantidade
-        selectedTools.set(currentTool.code, qty);
+        selectedTools.set(currentTool.code, { quantity: qty, name: currentTool.name });
         currentTool.element.classList.add('active', 'bg-primary', 'bg-opacity-10');
         const icon = currentTool.element.querySelector('.action-icon');
         icon.classList.remove('bi-plus-circle', 'text-primary');
@@ -199,9 +203,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateTextarea() {
         const entries = Array.from(selectedTools.entries());
-        // Formato: CODIGO:QTD CODIGO:QTD
-        const formatted = entries.map(([code, qty]) => `${code}:${qty}`).join(' ');
-        textarea.value = formatted;
+        // Formato exibido: Nome: QTD | Valor enviado: CODIGO:QTD
+        const displayText = entries.map(([, data]) => `${data.name}: ${data.quantity}`).join('\n');
+        const payload = entries.map(([code, data]) => `${code}:${data.quantity}`).join(' ');
+        displayTextarea.value = displayText;
+        hiddenInput.value = payload;
         countDisplay.textContent = entries.length + (entries.length === 1 ? ' ferramenta selecionada' : ' ferramentas selecionadas');
     }
 });

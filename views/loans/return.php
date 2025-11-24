@@ -55,7 +55,7 @@
                                 </td>
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="items[<?php echo $item['id']; ?>][confirm]" value="1" id="return_<?php echo $item['id']; ?>">
+                                        <input class="form-check-input" type="checkbox" name="items[<?php echo $item['id']; ?>][confirm]" value="1" id="return_<?php echo $item['id']; ?>" checked>
                                         <label class="form-check-label" for="return_<?php echo $item['id']; ?>">
                                             Devolver agora
                                         </label>

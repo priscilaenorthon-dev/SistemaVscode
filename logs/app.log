@@ -48,3 +48,6 @@ Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\SistemaVscode\public\index.php on line 16
 [2025-11-19 22:50:48] Falha no login {"email":"admin@empresa.com"}
+[19-Nov-2025 23:31:52 America/Sao_Paulo] PHP Warning:  Undefined array key "expected_return_date" in C:\xampp\htdocs\SistemaVscode\views\loans\print.php on line 34
+[19-Nov-2025 23:32:03 America/Sao_Paulo] PHP Warning:  Undefined array key "expected_return_date" in C:\xampp\htdocs\SistemaVscode\views\loans\print.php on line 34
+[19-Nov-2025 23:32:07 America/Sao_Paulo] PHP Warning:  Undefined array key "expected_return_date" in C:\xampp\htdocs\SistemaVscode\views\loans\print.php on line 34
