@@ -370,7 +370,8 @@ Dois arquivos SQL disponíveis na pasta `/bd`:
 ### Passo 1: Copiar Arquivos
 ```bash
 # Copie o projeto para htdocs do XAMPP
-C:\xampp\htdocs\SistemaVscode
+# Exemplo: C:\xampp\htdocs\SistemaVscode
+# (ou use outro nome de pasta de sua preferência)
 ```
 
 ### Passo 2: Iniciar Serviços
@@ -388,15 +389,16 @@ C:\xampp\htdocs\SistemaVscode
 ### Passo 4: Configurar Conexão
 Verifique `config/database.php`:
 ```php
-$dbHost = 'localhost';
-$dbName = 'sistemavscode';
-$dbUser = 'root';
-$dbPass = ''; // Sem senha por padrão no XAMPP
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'sistemavscode');
+define('DB_USER', 'root');
+define('DB_PASS', ''); // Sem senha por padrão no XAMPP
 ```
 
 ### Passo 5: Acessar
-- URL: http://localhost/SistemaVscode/public
-- Ou: http://localhost/SistemaVscode (redireciona automaticamente)
+- URL: http://localhost/[nome-da-pasta]/public
+- Ou: http://localhost/[nome-da-pasta] (redireciona automaticamente)
+- Exemplo: http://localhost/SistemaVscode/public
 
 ---
 
