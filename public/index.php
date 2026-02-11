@@ -187,6 +187,18 @@ switch ($route) {
         $controller = new MaintenanceController($pdo);
         $controller->index();
         break;
+    case 'maintenance_start':
+        checkAuth(['admin', 'operator']);
+        require_once '../controllers/MaintenanceController.php';
+        $controller = new MaintenanceController($pdo);
+        $controller->start();
+        break;
+    case 'maintenance_complete':
+        checkAuth(['admin', 'operator']);
+        require_once '../controllers/MaintenanceController.php';
+        $controller = new MaintenanceController($pdo);
+        $controller->complete();
+        break;
 
     default:
         // 404

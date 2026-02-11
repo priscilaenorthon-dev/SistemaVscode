@@ -212,7 +212,8 @@ class LoanController {
                 $damagedCount = 0;
                 foreach ($items_status as $item_id => $payload) {
                     // Se não marcado para devolver, pula e mantém emprestado
-                    if (isset($payload['confirm']) && $payload['confirm'] !== '1') {
+                    if (!isset($payload['confirm']) || $payload['confirm'] !== '1') {
+                        $allReturned = false;
                         continue;
                     }
 
@@ -305,7 +306,7 @@ class LoanController {
 
         // Buscar itens
         $stmtItems = $this->pdo->prepare("
-            SELECT t.code, t.description, t.serial_number
+            SELECT t.code, t.description, t.serial_number, li.quantity
             FROM loan_items li
             JOIN tools t ON li.tool_id = t.id
             WHERE li.loan_id = ?
