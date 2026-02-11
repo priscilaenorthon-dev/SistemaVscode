@@ -36,6 +36,9 @@
             <li class="nav-item">
             <a class="nav-link" href="<?php echo BASE_URL; ?>/?route=reports">Relatórios</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo BASE_URL; ?>/?route=maintenance">Manutenção</a>
+            </li>
         <?php endif; ?>
         <?php if ($_SESSION['user_level'] == 'admin'): ?>
             <li class="nav-item">

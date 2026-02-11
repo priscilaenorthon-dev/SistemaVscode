@@ -113,6 +113,7 @@
                     <th>Código</th>
                     <th>Descrição</th>
                     <th>Nº Série</th>
+                    <th>Quantidade</th>
                 </tr>
             </thead>
             <tbody>
@@ -121,6 +122,7 @@
                     <td><?php echo htmlspecialchars($item['code']); ?></td>
                     <td><?php echo htmlspecialchars($item['description']); ?></td>
                     <td><?php echo htmlspecialchars($item['serial_number']); ?></td>
+                    <td><?php echo (int)$item['quantity']; ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

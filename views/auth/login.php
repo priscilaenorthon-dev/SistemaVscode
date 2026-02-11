@@ -183,7 +183,7 @@
             <div class="cred-section small">
                 Admin: <span class="fw-medium text-dark">admin@empresa.com</span> / <span class="fw-medium text-dark">password</span><br>
                 Operador: <span class="fw-medium text-dark">operador@empresa.com</span> / <span class="fw-medium text-dark">password</span><br>
-                Usuário: <span class="fw-medium text-dark">usuario@usuario.com.br</span> / <span class="fw-medium text-dark">password</span>
+                Usuário: <span class="fw-medium text-dark">usuario3@empresa.com</span> / <span class="fw-medium text-dark">password</span>
             </div>
         </div>
     </div>
